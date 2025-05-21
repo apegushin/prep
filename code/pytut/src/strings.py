@@ -9,14 +9,13 @@ class StringLeetcodeProblems:
         i, j = 0, 1
         track = {s[0]: 0}
         while j < len(s):
-            if s[j] not in track.keys() or (s[j] in track.keys() and track[s[j]] <= i):
+            if s[j] not in track.keys() or track[s[j]] < i:
                 track[s[j]] = j
-                j += 1
-                maxlen = max(maxlen, j - i)
+                maxlen = max(maxlen, j - i + 1)
             else:
                 i = track[s[j]] + 1
                 track[s[j]] = j
-                j += 1
+            j += 1
         return maxlen
 
     def longestPalindrome(self, s: str) -> str:
@@ -39,8 +38,3 @@ class StringLeetcodeProblems:
             maxPal = res if len(res) > len(maxPal) else maxPal
         return maxPal
 
-
-if __name__ == '__main__':
-    slp = StringLeetcodeProblems()
-    print(slp.lengthOfLongestSubstring('babab'))
-    print(slp.longestPalindrome('babab'))
