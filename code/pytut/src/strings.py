@@ -1,7 +1,4 @@
-class StringLeetcodeProblems:
-    def __init__(self):
-        pass
-
+class StringLeetCode:
     def lengthOfLongestSubstring(self, s: str) -> int:
         if len(s) < 2:
             return len(s)

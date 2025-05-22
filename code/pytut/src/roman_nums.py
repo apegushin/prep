@@ -1,4 +1,4 @@
-class RomanNumConverter:
+class RomanNumConverterLeetCode:
     def intToRoman(self, num: int) -> str:
         def first_digit(num: int, dec_place: int = 1000) -> tuple[int, int]:
             if num == 0:

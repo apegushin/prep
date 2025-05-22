@@ -1,9 +1,9 @@
-from src.roman_nums import RomanNumConverter
+from src.roman_nums import RomanNumConverterLeetCode
 
-class TestRomanNumsLeetcodeProblems:
+class TestRomanNumConverterLeetCode:
     def setup_method(self, method):
         print(f'setting up test for {method}')
-        self.rnc = RomanNumConverter()
+        self.rnc = RomanNumConverterLeetCode()
 
     def teardown_method(self, method):
         print(f'tearing down after test for {method}')

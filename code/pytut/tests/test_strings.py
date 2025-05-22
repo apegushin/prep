@@ -1,11 +1,10 @@
-import pytest
-from src.strings import StringLeetcodeProblems
+from src.strings import StringLeetCode
 
-class TestStringLeetcodeProblems:
+class TestStringLeetcode:
 
     def setup_method(self, method):
         print(f'setting up test for {method}')
-        self.slp = StringLeetcodeProblems()
+        self.slp = StringLeetCode()
 
     def teardown_method(self, method):
         print(f'tearing down after test for {method}')

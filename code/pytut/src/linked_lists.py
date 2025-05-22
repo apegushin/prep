@@ -5,10 +5,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-class LinkedListLeetcodeProblems:
-    def __init__(self):
-        pass
-
+class LinkedListLeetcode:
     def print_list(self, head: Optional[ListNode]):
         while head != None:
             print(f'{head.val} -> ', end="")
@@ -55,11 +52,3 @@ class LinkedListLeetcodeProblems:
                 curr.next = ListNode(0, None)
                 curr = curr.next
         return head
-
-
-if __name__ == '__main__':
-    lllp = LinkedListLeetcodeProblems()
-    head1 = lllp.create_list_from_seq([2,4,3])
-    head2 = lllp.create_list_from_seq([5,6,4])
-    head3 = lllp.addTwoNumbers(head1, head2)
-    lllp.print_list(head3)
