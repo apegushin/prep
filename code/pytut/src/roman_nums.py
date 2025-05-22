@@ -23,3 +23,17 @@ class RomanNumConverter:
                     break
             digit, dec_place = first_digit(num, dec_place)
         return res
+
+    def romanToInt(self, s: str) -> int:
+        res: int = 0
+        i: int = 0
+        sn = {'IV': 4, 'IX': 9, 'XL': 40, 'XC': 90, 'CD': 400, 'CM': 900}
+        n = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        while i < len(s):
+            if i + 1 < len(s) and s[i: i + 2] in sn.keys():
+                res += sn[s[i:i+2]]
+                i += 2
+            else:
+                res += n[s[i]]
+                i += 1
+        return res

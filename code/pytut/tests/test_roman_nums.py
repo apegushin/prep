@@ -18,3 +18,13 @@ class TestRomanNumsLeetcodeProblems:
         assert self.rnc.intToRoman(58) == 'LVIII'
         assert self.rnc.intToRoman(1994) == 'MCMXCIV'
         assert self.rnc.intToRoman(3749) == 'MMMDCCXLIX'
+
+    def test_romanToInt(self):
+        assert self.rnc.romanToInt('III') == 3
+        assert self.rnc.romanToInt('IV') == 4
+        assert self.rnc.romanToInt('IX') == 9
+        assert self.rnc.romanToInt('LVIII') == 58
+        assert self.rnc.romanToInt('MCMXCIV') == 1994
+        assert self.rnc.romanToInt('MMMCMXCIX') == 3999
+        assert self.rnc.romanToInt('MMMCMXC') == 3990
+        assert self.rnc.romanToInt('MMMDCCXLIX') == 3749
