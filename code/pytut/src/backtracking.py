@@ -1,3 +1,37 @@
 class BacktrackingLeetCode:
     def letterCombinations(self, digits: str) -> list[str]:
-        return []
+        res = []
+        if len(digits) == 0:
+            return res
+        dig2let = {'1': (),
+                   '2': ('a', 'b', 'c'),
+                   '3': ('d', 'e', 'f'),
+                   '4': ('g', 'h', 'i'),
+                   '5': ('j', 'k', 'l'),
+                   '6': ('m', 'n', 'o'),
+                   '7': ('p', 'q', 'r', 's'),
+                   '8': ('t', 'u', 'v'),
+                   '9': ('w', 'x', 'y', 'z'),
+                   '0': (' ')}
+
+        if len(digits) == 1:
+            return list(dig2let[digits[0]])
+
+        def addLetter(i, s):
+            if i != len(digits):
+                for c in dig2let[digits[i]]:
+                    addLetter(i + 1, s + c)
+            else:
+                res.append(s)
+                return
+
+        addLetter(0, '')
+        return res
+
+    def wordExists(self, board: list[list[str]], word: str) -> bool:
+        
+        return True
+
+if __name__ == '__main__':
+    blc = BacktrackingLeetCode()
+    print(blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'))
