@@ -59,7 +59,31 @@ class MatrixLeetCode:
 
         return res
 
+    def numIslands(self, grid: list[list[str]]) -> int:
+        n = len(grid)
+        m = len(grid[0])
+
+        def destroyIsland(i: int, j: int):
+            if i < 0 or i >= n or j < 0 or j >= m or grid[i][j] == '0':
+                return
+
+            grid[i][j] = '0'
+            destroyIsland(i - 1, j)
+            destroyIsland(i + 1, j)
+            destroyIsland(i, j - 1)
+            destroyIsland(i, j + 1)
+
+        count = 0
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == '1':
+                    count += 1
+                    destroyIsland(i, j)
+        return count
+
+
 if __name__ == '__main__':
     mlc = MatrixLeetCode()
     # print(mlc.spiralOrder([[1,2,3],[4,5,6],[7,8,9]]))
-    print(mlc.spiralOrder([[1,2,3,4],[5,6,7,8],[9,10,11,12]]))
+    # print(mlc.spiralOrder([[1,2,3,4],[5,6,7,8],[9,10,11,12]]))
+    print(mlc.numIslands([["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]))
