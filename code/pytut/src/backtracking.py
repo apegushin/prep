@@ -29,8 +29,30 @@ class BacktrackingLeetCode:
         return res
 
     def wordExists(self, board: list[list[str]], word: str) -> bool:
-        
-        return True
+        visited = [[False for i in range(len(board[0]))] for j in range(len(board))]
+
+        def charFound(i, j, n) -> bool:
+            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) \
+                or visited[i][j] or board[i][j] != word[n]:
+                return False
+
+            if n == len(word) - 1:
+                return True
+            else:
+                visited[i][j] = True
+                res = charFound(i + 1, j, n + 1) \
+                    or charFound(i - 1, j, n + 1) \
+                    or charFound(i, j + 1, n + 1) \
+                    or charFound(i, j - 1, n + 1)
+                visited[i][j] = False
+                return res
+
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if charFound(i, j, 0):
+                    return True
+
+        return False
 
 if __name__ == '__main__':
     blc = BacktrackingLeetCode()

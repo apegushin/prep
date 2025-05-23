@@ -12,3 +12,6 @@ class TestBacktrackingLeetCode:
 
     def test_wordExists(self):
         assert self.blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED') == True
+        assert self.blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'SEE') == True
+        assert self.blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCB') == False
+        assert self.blc.wordExists([["A","B","C","E"],["S","F","E","S"],["A","D","E","E"]], "ABCESEEEFS") == True
