@@ -18,3 +18,21 @@ class DPLeetCode:
                 return cm + 1 if cm < float('inf') else -1
 
         return minCoins(amount)
+
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        steps = [0 for i in range(amount + 1)]
+
+        for i in range(1, amount + 1):
+            cm = float('inf')
+            for c in coins:
+                if i - c >= 0 and steps[i - c] >= 0:
+                    cm = min(cm, steps[i - c] + 1)
+            steps[i] = cm if cm < float('inf') else -1
+
+        return steps[amount]
+
+    def climbStairs(self, n: int) -> int:
+        steps = [1] * (n + 1)
+        for i in range(2, n + 1):
+            steps[i] = steps[i - 1] + steps[i - 2]
+        return steps[n]
