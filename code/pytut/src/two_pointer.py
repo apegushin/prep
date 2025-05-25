@@ -1,4 +1,5 @@
 import math
+from typing import List
 
 class TwoPointerLeetCode:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
@@ -50,7 +51,28 @@ class TwoPointerLeetCode:
                     r -= 1
         return closest_sum
 
+    def longestMountain(self, arr: List[int]) -> int:
+        i, n = 1, len(arr) - 1
+        res = 0
+
+        while i < n:
+            ls, rs = 0, 0
+            li, ri = i - 1, i + 1
+            while li >= 0 and arr[li] < arr[li + 1]:
+                ls += 1
+                li -= 1
+
+            while ri <= n and arr[ri] < arr[ri - 1]:
+                rs += 1
+                ri += 1
+
+            if ls > 0 and rs > 0:
+                res = max(res, ls + 1 + rs)
+
+            i = ri
+        return res
 
 if __name__ == '__main__':
     tplc = TwoPointerLeetCode()
     # print(tplc.threeSumClosest([2, 5, 6, 7], 16))
+    print(tplc.longestMountain([2,1,4,7,3,2,5]))

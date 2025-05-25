@@ -15,3 +15,7 @@ class TestTwoPointerLeetCode:
         assert self.tplc.threeSumClosest([0, 0, 0], 1) == 0
         assert self.tplc.threeSumClosest([-2, 0, 0, 2], 2) == 2
         assert self.tplc.threeSumClosest([2, 5, 6, 7], 16) == 15
+
+    def test_longestMountain(self):
+        assert self.tplc.longestMountain([2,1,4,7,3,2,5]) == 5
+        assert self.tplc.longestMountain([2,2,2]) == 0
