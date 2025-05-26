@@ -81,6 +81,24 @@ class BacktrackingLeetCode:
         buildCombination([], 1)
         return res
 
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        candidates.sort()
+
+        def findComb(comb, idx):
+            sc = sum(comb)
+            if sc == target:
+                res.append(comb[:])
+                return
+
+            for i in range(idx, len(candidates)):
+                if sc + candidates[i] > target:
+                    break
+                findComb(comb + [candidates[i]], i)
+
+        findComb([], 0)
+        return res
+
 if __name__ == '__main__':
     blc = BacktrackingLeetCode()
     # print(blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'))

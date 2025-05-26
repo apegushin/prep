@@ -23,3 +23,9 @@ class TestBacktrackingLeetCode:
     def test_combine(self):
         assert self.blc.combine(4, 2).sort() == [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]].sort()
         assert self.blc.combine(1, 1).sort() == [[1]].sort()
+
+    def test_combinationSum(self):
+        assert self.blc.combinationSum([2,3,6,7], 7).sort() == [[2,2,3],[7]].sort()
+        assert self.blc.combinationSum([2,3,5], 8).sort() == [[2,2,2,2],[2,3,3],[3,5]].sort()
+        assert self.blc.combinationSum([2], 1) == []
+        assert self.blc.combinationSum([2, 3, 9], 11).sort() == [[2, 2, 2, 2, 3], [2, 3, 3, 3], [2, 9]].sort()
