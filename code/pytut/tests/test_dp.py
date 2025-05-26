@@ -20,5 +20,3 @@ class TestDPLeetCode:
     def test_rob(self):
         assert self.dplc.rob([1,2,3,1]) == 4
         assert self.dplc.rob([2,7,9,3,1]) == 12
-
-

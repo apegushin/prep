@@ -1,3 +1,5 @@
+from typing import List
+
 class BacktrackingLeetCode:
     def letterCombinations(self, digits: str) -> list[str]:
         res = []
@@ -54,6 +56,33 @@ class BacktrackingLeetCode:
 
         return False
 
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        def addSubset(cur_s, i):
+            res.append(cur_s[:])
+            for j in range(i, len(nums)):
+                addSubset(cur_s + [nums[j]], j + 1)
+
+        addSubset([], 0)
+        return res
+
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+
+        def buildCombination(c, i):
+            if len(c) == k:
+                res.append(c[:])
+                return
+
+            for j in range(i, n + 1):
+                buildCombination(c + [j], j + 1)
+
+        buildCombination([], 1)
+        return res
+
 if __name__ == '__main__':
     blc = BacktrackingLeetCode()
-    print(blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'))
+    # print(blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'))
+    # print(blc.subsets([1, 2, 3]))
+    print(blc.combine(4, 2))
