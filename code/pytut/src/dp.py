@@ -36,3 +36,14 @@ class DPLeetCode:
         for i in range(2, n + 1):
             steps[i] = steps[i - 1] + steps[i - 2]
         return steps[n]
+
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n < 3:
+            return max(nums)
+
+        partials = [nums[0], nums[1], nums[0] + nums[2]]
+        for i in range(3, n):
+            partials.append(nums[i] + (max(partials[i - 2], partials[i - 3])))
+            print(partials)
+        return max(partials[n - 1], partials[n - 2])

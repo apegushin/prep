@@ -17,3 +17,8 @@ class TestDPLeetCode:
         assert self.dplc.climbStairs(3) == 3
         assert self.dplc.climbStairs(4) == 5
 
+    def test_rob(self):
+        assert self.dplc.rob([1,2,3,1]) == 4
+        assert self.dplc.rob([2,7,9,3,1]) == 12
+
+
