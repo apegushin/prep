@@ -1,4 +1,5 @@
 from typing import Optional
+from typing import List
 
 class ListNode:
     def __init__(self, val: int = 0, next = None) -> None:
@@ -6,32 +7,28 @@ class ListNode:
         self.next = next
 
 class LinkedListLeetcode:
-    def print_list(self, head: Optional[ListNode]):
-        while head != None:
-            print(f'{head.val} -> ', end="")
-            head = head.next
+    def printLinkedList(self, l: Optional[ListNode]):
+        node = l
+        print('head -> ', end='')
+        while node != None:
+            print(f'{node.val} -> ', end='')
+            node = node.next
         print('None')
 
-    def create_list(self, size: int = 10) -> Optional[ListNode]:
-        if size == 0:
-            return None
-        head = ListNode(0)
-        curr = head
-        for i in range(1, size):
-            curr.next = ListNode(i)
-            curr = curr.next
+    def createFromList(self, nums: List[int]) -> Optional[ListNode]:
+        head = None
+        for e in reversed(nums):
+            node = ListNode(e, head)
+            head = node
         return head
 
-    def create_list_from_seq(self, l: list = []) -> Optional[ListNode]:
-        if len(l) == 0:
-            return None
-        head = ListNode(l[0])
-        curr = head
-        for e in l[1:]:
-            curr.next = ListNode(e)
-            curr = curr.next
-        return head
-
+    def linkedList2List(self, l: Optional[ListNode]) -> List[int]:
+        lst = []
+        node = l
+        while node:
+            lst.append(node.val)
+            node = node.next
+        return lst
 
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         if l1 is None and l2 is None:
@@ -52,3 +49,24 @@ class LinkedListLeetcode:
                 curr.next = ListNode(0, None)
                 curr = curr.next
         return head
+
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        while head and head.val == val:
+            head = head.next
+        if head is None:
+            return head
+
+        h = head
+        while h.next:
+            if h.next.val != val:
+                h = h.next
+            else:
+                h.next = h.next.next
+        return head
+
+if __name__ == '__main__':
+    lllc = LinkedListLeetcode()
+
+    h1 = lllc.createFromList([2,4,3])
+    print(lllc.linkedList2List(h1))
+
