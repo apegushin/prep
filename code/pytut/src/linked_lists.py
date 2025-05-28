@@ -7,10 +7,11 @@ class ListNode:
         self.next = next
 
 class LinkedListLeetcode:
-    def printLinkedList(self, l: Optional[ListNode]):
+    def printLinkedList(self, l: Optional[ListNode], label: str = None):
         node = l
+        print(f'{label}: ' if label is not None else '', end='')
         print('head -> ', end='')
-        while node != None:
+        while node is not None:
             print(f'{node.val} -> ', end='')
             node = node.next
         print('None')
@@ -31,6 +32,8 @@ class LinkedListLeetcode:
         return lst
 
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        """ leetcode #2 """
+
         if l1 is None and l2 is None:
             return None
         head = ListNode(0, None)
@@ -51,6 +54,8 @@ class LinkedListLeetcode:
         return head
 
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        """ leetcode #203 """
+
         while head and head.val == val:
             head = head.next
         if head is None:
@@ -64,9 +69,64 @@ class LinkedListLeetcode:
                 h.next = h.next.next
         return head
 
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """ leetcode #206 """
+
+        if head is None or head.next is None:
+            return head
+
+        rev = None
+        while head:
+            nxt = head.next
+            head.next = rev
+            rev = head
+            head = nxt
+        return rev
+
+    def reverseNnodes(self, head: Optional[ListNode], num: int) -> Optional[ListNode]:
+        if num < 2: return head
+
+        last = head
+        rev = None
+        i = 0
+        while head is not None and i < num:
+            nxt = head.next
+            head.next = rev
+            rev = head
+            head = nxt
+            i += 1
+        last.next = head
+        return rev
+
+
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        """ leetcode #92 """
+
+        if head is None or head.next is None or right - left < 2:
+            return head
+
+        h = head
+        prev = head
+        i = 1
+        while i < left and head is not None:
+            i += 1
+            prev = head
+            head = head.next
+
+        rh = self.reverseNnodes(head, right - left + 1)
+        prev.next = rh if left > 1 else rh.next
+        return h
+
+
 if __name__ == '__main__':
     lllc = LinkedListLeetcode()
 
-    h1 = lllc.createFromList([2,4,3])
-    print(lllc.linkedList2List(h1))
+    h1 = lllc.createFromList([1,4,3,2,5])
+    lllc.printLinkedList(h1, 'h1')
+    # print(lllc.linkedList2List(h1))
+
+    h3 = lllc.reverseBetween(h1, 2, 4)
+    # h3 = lllc.reverseNnodes(h2, 1)
+    lllc.printLinkedList(h3, 'h3')
+    # print(lllc.linkedList2List(h2))
 
