@@ -2,6 +2,8 @@ from typing import List
 
 class BacktrackingLeetCode:
     def letterCombinations(self, digits: str) -> list[str]:
+        """ leecode #17 """
+
         res = []
         if len(digits) == 0:
             return res
@@ -31,6 +33,8 @@ class BacktrackingLeetCode:
         return res
 
     def wordExists(self, board: list[list[str]], word: str) -> bool:
+        """ leetcode #79 """
+
         visited = [[False for i in range(len(board[0]))] for j in range(len(board))]
 
         def charFound(i, j, n) -> bool:
@@ -57,17 +61,41 @@ class BacktrackingLeetCode:
         return False
 
     def subsets(self, nums: List[int]) -> List[List[int]]:
+        """ leetcode #78 """
+
         res = []
 
         def addSubset(cur_s, i):
-            res.append(cur_s[:])
-            for j in range(i, len(nums)):
-                addSubset(cur_s + [nums[j]], j + 1)
+            if i == len(nums):
+                res.append(cur_s[:])
+                return
+
+            cur_s.append(nums[i])
+            addSubset(cur_s, i + 1)
+            cur_s.pop()
+            addSubset(cur_s, i + 1)
 
         addSubset([], 0)
         return res
 
+    def subsets_generator(self, nums: List[int]):
+        """ leetcode #78 implemented as generator """
+
+        def addSubset(cur_s, i):
+            if i == len(nums):
+                yield cur_s[:]
+
+            else:
+                cur_s.append(nums[i])
+                yield from addSubset(cur_s, i + 1)
+                cur_s.pop()
+                yield from addSubset(cur_s, i + 1)
+
+        yield from addSubset([], 0)
+
     def combine(self, n: int, k: int) -> List[List[int]]:
+        """ leetcode #77 """
+
         res = []
 
         def buildCombination(c, i):
@@ -82,6 +110,8 @@ class BacktrackingLeetCode:
         return res
 
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        """ leetcode #39 """
+
         res = []
         candidates.sort()
 
@@ -102,5 +132,5 @@ class BacktrackingLeetCode:
 if __name__ == '__main__':
     blc = BacktrackingLeetCode()
     # print(blc.wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'))
-    # print(blc.subsets([1, 2, 3]))
-    print(blc.combine(4, 2))
+    # print(blc.combine(4, 2))
+    print(blc.subsets([1, 2, 3]))
