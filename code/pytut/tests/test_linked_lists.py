@@ -57,3 +57,19 @@ class TestLinkedListLeetcode:
         l2 = self.lllc.linkedList2List(h2)
         assert l2 == reverse_list
 
+    @pytest.mark.parametrize("list1, list2, list3, list4, result",
+                             [([], [], [], [], []),
+                              ([1], [1], [], [1], [1,1,1]),
+                              ([], [1], [1], [], [1,1]),
+                              ([1,2], [3,4], [5,6], [7,8], [1,2,3,4,5,6,7,8]),
+                              ([1,2,3], [1,2,3], [1,2,3], [1,2,3], [1,1,1,1,2,2,2,2,3,3,3,3]),
+                              ([1,2], [1,2,3], [2,3,4], [1,2,3,4,5,6], [1,1,1,2,2,2,2,3,3,3,4,4,5,6]),
+                             ])
+    def test_reverse(self, list1, list2, list3, list4, result):
+        h1 = self.lllc.createFromList(list1)
+        h2 = self.lllc.createFromList(list2)
+        h3 = self.lllc.createFromList(list3)
+        h4 = self.lllc.createFromList(list4)
+        hr = self.lllc.mergeKLists([h1, h2, h3, h4])
+        assert self.lllc.linkedList2List(hr) == result
+

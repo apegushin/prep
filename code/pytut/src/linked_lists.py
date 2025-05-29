@@ -1,5 +1,6 @@
 from typing import Optional
 from typing import List
+import heapq
 
 class ListNode:
     def __init__(self, val: int = 0, next = None) -> None:
@@ -120,17 +121,56 @@ class LinkedListLeetcode:
 
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         """ leetcode #23 """
-        pass
+
+        class ComparableListNode:
+            def __init__(self, l: ListNode):
+                self.l = l
+            def __lt__(self, o: ListNode):
+                return self.l.val < o.l.val
+
+        heads = []
+        for list in lists:
+            if list is not None:
+                heapq.heappush(heads, ComparableListNode(list))
+
+        head, curr = None, None
+        while True:
+            if len(heads) == 0:
+                break
+
+            min_head = heapq.heappop(heads)
+            if min_head.l.next is not None:
+                heapq.heappush(heads, ComparableListNode(min_head.l.next))
+
+            if head is None:
+                head = min_head.l
+                curr = head
+            else:
+                curr.next = min_head.l
+                curr = curr.next
+            curr.next = None
+
+        return head
+
 
 if __name__ == '__main__':
     lllc = LinkedListLeetcode()
 
-    h1 = lllc.createFromList([1,4,3,2,5])
+    h1 = lllc.createFromList([1,2,3,4,5])
     lllc.printLinkedList(h1, 'h1')
-    # print(lllc.linkedList2List(h1))
 
-    h3 = lllc.reverseBetween(h1, 2, 4)
-    # h3 = lllc.reverseNnodes(h2, 1)
+    h2 = lllc.createFromList([1,2,3,4,5,6,7,8])
+    lllc.printLinkedList(h2, 'h2')
+
+    h3 = lllc.createFromList([1,2,3,4,5,6,7,8,9,10,11])
     lllc.printLinkedList(h3, 'h3')
+
+    h4 = lllc.mergeKLists([h1,h2,h3])
+    lllc.printLinkedList(h4)
+
+    # print(lllc.linkedList2List(h1))
+    # h3 = lllc.reverseBetween(h1, 2, 4)
+    # h3 = lllc.reverseNnodes(h2, 1)
+    # lllc.printLinkedList(h3, 'h3')
     # print(lllc.linkedList2List(h2))
 
