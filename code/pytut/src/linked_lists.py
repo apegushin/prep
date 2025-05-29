@@ -102,21 +102,25 @@ class LinkedListLeetcode:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
         """ leetcode #92 """
 
-        if head is None or head.next is None or right - left < 2:
+        if head is None or head.next is None or right - left == 0:
             return head
 
-        h = head
-        prev = head
+        if left == 1:
+            return self.reverseNnodes(head, right - left + 1)
+
+        prev, h = None, head
         i = 1
         while i < left and head is not None:
             i += 1
-            prev = head
-            head = head.next
+            prev, head = head, head.next
 
         rh = self.reverseNnodes(head, right - left + 1)
-        prev.next = rh if left > 1 else rh.next
+        prev.next = rh
         return h
 
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        """ leetcode #23 """
+        pass
 
 if __name__ == '__main__':
     lllc = LinkedListLeetcode()
