@@ -106,10 +106,8 @@ class LinkedListLeetcode:
         if head is None or head.next is None or right - left == 0:
             return head
 
-        if left == 1:
-            return self.reverseNnodes(head, right - left + 1)
-
-        prev, h = None, head
+        prev = ListNode(0, head)
+        h = prev
         i = 1
         while i < left and head is not None:
             i += 1
@@ -117,7 +115,7 @@ class LinkedListLeetcode:
 
         rh = self.reverseNnodes(head, right - left + 1)
         prev.next = rh
-        return h
+        return h.next
 
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         """ leetcode #23 """
@@ -134,10 +132,7 @@ class LinkedListLeetcode:
                 heapq.heappush(heads, ComparableListNode(list))
 
         head, curr = None, None
-        while True:
-            if len(heads) == 0:
-                break
-
+        while heads:
             min_head = heapq.heappop(heads)
             if min_head.l.next is not None:
                 heapq.heappush(heads, ComparableListNode(min_head.l.next))
