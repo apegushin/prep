@@ -147,6 +147,23 @@ class LinkedListLeetcode:
 
         return head
 
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None: return head
+
+        dummy = ListNode(0, head)
+        prev = dummy
+        cur1, cur2 = head, head.next
+
+        while cur1 is not None and cur2 is not None:
+            post = cur2.next
+            prev.next = cur2
+            cur2.next = cur1
+            cur1.next = post
+            prev = cur1
+            cur1 = post
+            cur2 = post.next if post is not None else None
+
+        return dummy.next
 
 if __name__ == '__main__':
     lllc = LinkedListLeetcode()

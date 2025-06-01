@@ -73,3 +73,16 @@ class TestLinkedListLeetcode:
         hr = self.lllc.mergeKLists([h1, h2, h3, h4])
         assert self.lllc.linkedList2List(hr) == result
 
+    @pytest.mark.parametrize("list, swapped",
+                             [([], []),
+                              ([1], [1]),
+                              ([1,2], [2,1]),
+                              ([1,2,3], [2,1,3]),
+                              ([1,2,3,4],[2,1,4,3]),
+                              ([1,2,3,4,5,6], [2,1,4,3,6,5]),
+                              ([1,2,3,4,5,6,7,8,9], [2,1,4,3,6,5,8,7,9]),                             ])
+    def test_swapPairs(self, list, swapped):
+        h1 = self.lllc.createFromList(list)
+        h2 = self.lllc.swapPairs(h1)
+        assert self.lllc.linkedList2List(h2) == swapped
+
