@@ -6,7 +6,7 @@ class TestGraphLeetCode:
     def setup_method(self, method):
         self.glc = GraphLeetCode()
 
-    @pytest.mark.parametrize("numCourses, prereqs, decision",
+    @pytest.mark.parametrize('numCourses, prereqs, decision',
                              [(2, [[1,0]], True),
                               (2, [[1,0],[0,1]], False),
                              ])

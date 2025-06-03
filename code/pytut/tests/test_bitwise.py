@@ -6,7 +6,7 @@ class TestBitwiseLeetCode:
     def setup_method(self, method):
         self.blc = BitwiseLeetCode()
 
-    @pytest.mark.parametrize("divident, divisor, result",
+    @pytest.mark.parametrize('divident, divisor, result',
                              [(10, 3, 3),
                               (10, 2, 5),
                               (10, -3, -3),

@@ -6,7 +6,7 @@ class TestLinkedListLeetcode:
     def setup_method(self, method):
         self.lllc = LinkedListLeetcode()
 
-    @pytest.mark.parametrize("list1, list2, result",
+    @pytest.mark.parametrize('list1, list2, result',
                              [([2,4,3], [5,6,4], [8, 0, 7]),])
     def test_addTwoNumbers(self, list1, list2, result):
         h1 = self.lllc.createFromList(list1)
@@ -16,7 +16,7 @@ class TestLinkedListLeetcode:
         l3.reverse()
         assert l3 == result
 
-    @pytest.mark.parametrize("list1, remove, result",
+    @pytest.mark.parametrize('list1, remove, result',
                              [([1,2,6,3,4,5,6], 6, [1,2,3,4,5]),
                               ([1,2,6,3,4,5,6], 3, [1,2,6,4,5,6]),
                               ([], 3, []),
@@ -30,7 +30,7 @@ class TestLinkedListLeetcode:
         h2 = self.lllc.removeElements(h1, remove)
         assert self.lllc.linkedList2List(h2) == result
 
-    @pytest.mark.parametrize("list, left, right, result",
+    @pytest.mark.parametrize('list, left, right, result',
                              [([1,2,3,4,5], 2, 4, [1,4,3,2,5]),
                               ([1,2,3], 1, 1, [1,2,3]),
                               ([1,2,3], 1, 2, [2,1,3]),
@@ -43,7 +43,7 @@ class TestLinkedListLeetcode:
         h2 = self.lllc.reverseBetween(h1, left, right)
         assert self.lllc.linkedList2List(h2) == result
 
-    @pytest.mark.parametrize("list, reverse_list",
+    @pytest.mark.parametrize('list, reverse_list',
                              [([], []),
                               ([1], [1]),
                               ([1,2], [2,1]),
@@ -57,7 +57,7 @@ class TestLinkedListLeetcode:
         l2 = self.lllc.linkedList2List(h2)
         assert l2 == reverse_list
 
-    @pytest.mark.parametrize("list1, list2, list3, list4, result",
+    @pytest.mark.parametrize('list1, list2, list3, list4, result',
                              [([], [], [], [], []),
                               ([1], [1], [], [1], [1,1,1]),
                               ([], [1], [1], [], [1,1]),
@@ -73,7 +73,7 @@ class TestLinkedListLeetcode:
         hr = self.lllc.mergeKLists([h1, h2, h3, h4])
         assert self.lllc.linkedList2List(hr) == result
 
-    @pytest.mark.parametrize("list, swapped",
+    @pytest.mark.parametrize('list, swapped',
                              [([], []),
                               ([1], [1]),
                               ([1,2], [2,1]),
