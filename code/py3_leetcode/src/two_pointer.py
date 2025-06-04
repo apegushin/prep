@@ -71,8 +71,3 @@ class TwoPointerLeetCode:
 
             i = ri
         return res
-
-if __name__ == '__main__':
-    tplc = TwoPointerLeetCode()
-    # print(tplc.threeSumClosest([2, 5, 6, 7], 16))
-    print(tplc.longestMountain([2,1,4,7,3,2,5]))

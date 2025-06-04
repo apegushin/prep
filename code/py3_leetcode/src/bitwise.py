@@ -24,7 +24,3 @@ def divide(dividend: int, divisor: int) -> int:
         i >>= 1
 
     return sign * quotient
-
-if __name__ == '__main__':
-    print(divide(2147483647, 2))
-    print(divide(-2147483648, 2))

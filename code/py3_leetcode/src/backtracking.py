@@ -127,8 +127,3 @@ def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
 
     findComb([], 0)
     return res
-
-if __name__ == '__main__':
-    # print(wordExists([['A','B','C','E'],['S','F','C','S'],['A','D','E','E']], 'ABCCED'))
-    # print(combine(4, 2))
-    print(subsets([1, 2, 3]))

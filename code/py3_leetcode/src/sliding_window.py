@@ -46,8 +46,3 @@ def minSubArrayLen(target: int, nums: List[int]) -> int:
             min_sz = min(min_sz, r - l)
 
     return min_sz if min_sz < float('inf') else 0
-
-
-if __name__ == '__main__':
-    # print(minSubArrayLen1(11, [1,2,3,4,5]))
-    print(minSubArrayLen(7, [2,3,1,2,4,3]))

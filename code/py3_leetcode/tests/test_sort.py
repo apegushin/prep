@@ -1,16 +1,25 @@
-from src.sort import SortLeetCode
+import src.sort as slc
+import pytest
 
-class TestMatrixLeetCode:
-    def setup_method(self, method):
-        self.slc = SortLeetCode()
+@pytest.mark.parametrize('nums, resNums',
+                         [([-4, -1, 0, 1, 2, 3, 5, 6], [0, 1, 1, 2, 3, 4, 5, 6]),
+                          ([-12, -10, -8, -8, -5, -4, -1, 0, 1, 2, 3, 3, 5, 6], [0, 1, 1, 2, 3, 3, 4, 5, 5, 6, 8, 8, 10, 12]),
+                          ([], []),
+                          ([1, 2], [1, 2]),
+                          ([-1], [1]),
+                          ([0], [0]),
+                          ([-2, -1], [1, 2]),
+                          ([-2, -1, 0], [0, 1, 2]),
+                          ([0, 2, 4], [0, 2, 4]),
+                         ])
+def test_mergeNegSortedList(nums, resNums):
+    assert slc.mergeNegSortedList(nums) == resNums
 
-    def test_mergeNegSortedList(self):
-        assert self.slc.mergeNegSortedList([-4, -1, 0, 1, 2, 3, 5, 6]) == [0, 1, 1, 2, 3, 4, 5, 6]
-        assert self.slc.mergeNegSortedList([-12, -10, -8, -8, -5, -4, -1, 0, 1, 2, 3, 3, 5, 6]) == [0, 1, 1, 2, 3, 3, 4, 5, 5, 6, 8, 8, 10, 12]
-        assert self.slc.mergeNegSortedList([]) == []
-        assert self.slc.mergeNegSortedList([1, 2]) == [1, 2]
-        assert self.slc.mergeNegSortedList([-1]) == [1]
-        assert self.slc.mergeNegSortedList([0]) == [0]
-        assert self.slc.mergeNegSortedList([-2, -1]) == [1, 2]
-        assert self.slc.mergeNegSortedList([-2, -1, 0]) == [0, 1, 2]
-        assert self.slc.mergeNegSortedList([0, 2, 4]) == [0, 2, 4]
+@pytest.mark.parametrize('nums1, m, nums2, n, expectedNums1',
+                        [([1,2,3,0,0,0], 3, [2,5,6], 3, [1,2,2,3,5,6]),
+                         ([1], 1, [], 0, [1]),
+                         ([0], 0, [1], 1, [1]),
+                        ])
+def test_mergeTwoSortedListsInPlace(nums1, m, nums2, n, expectedNums1):
+    slc.mergeTwoSortedListsInPlace(nums1, m, nums2, n)
+    assert nums1 == expectedNums1

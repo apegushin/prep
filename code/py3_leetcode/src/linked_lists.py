@@ -164,23 +164,3 @@ def swapPairs(head: Optional[ListNode]) -> Optional[ListNode]:
         cur2 = post.next if post is not None else None
 
     return dummy.next
-
-if __name__ == '__main__':
-    h1 = createFromList([1,2,3,4,5])
-    printLinkedList(h1, 'h1')
-
-    h2 = createFromList([1,2,3,4,5,6,7,8])
-    printLinkedList(h2, 'h2')
-
-    h3 = createFromList([1,2,3,4,5,6,7,8,9,10,11])
-    printLinkedList(h3, 'h3')
-
-    h4 = mergeKLists([h1,h2,h3])
-    printLinkedList(h4)
-
-    # print(linkedList2List(h1))
-    # h3 = reverseBetween(h1, 2, 4)
-    # h3 = reverseNnodes(h2, 1)
-    # printLinkedList(h3, 'h3')
-    # print(linkedList2List(h2))
-
