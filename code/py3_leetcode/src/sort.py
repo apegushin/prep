@@ -43,3 +43,25 @@ def mergeTwoSortedListsInPlace(nums1: List[int], m: int, nums2: List[int], n: in
             nums1[k] = nums2[j]
             j -= 1
         k -= 1
+
+def mergeIntervals(intervals: List[List[int]]) -> List[List[int]]:
+    """ leetcode #56 """
+
+    intervals.sort(key=lambda x: x[0])
+
+    def intersect(in1: List[int], in2: List[int]) -> bool:
+        return in2[0] >= in1[0] and in2[0] <= in1[1]
+
+    def mergeInto1st(in1: List[int], in2: List[int]):
+        in1[0] = min(in1[0], in2[0])
+        in1[1] = max(in1[1], in2[1])
+
+    i = 0
+    while i < len(intervals) - 1:
+        if intersect(intervals[i], intervals[i + 1]):
+            mergeInto1st(intervals[i], intervals[i + 1])
+            intervals.pop(i + 1)
+        else:
+            i += 1
+
+    return intervals

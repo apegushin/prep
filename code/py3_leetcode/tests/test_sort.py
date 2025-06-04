@@ -23,3 +23,10 @@ def test_mergeNegSortedList(nums, resNums):
 def test_mergeTwoSortedListsInPlace(nums1, m, nums2, n, expectedNums1):
     slc.mergeTwoSortedListsInPlace(nums1, m, nums2, n)
     assert nums1 == expectedNums1
+
+@pytest.mark.parametrize('intervals, result',
+                        [([[1,3],[2,6],[8,10],[15,18]], [[1,6],[8,10],[15,18]]),
+                         ([[1,4],[4,5]], [[1,5]]),
+                        ])
+def test_mergeIntervals(intervals, result):
+    assert slc.mergeIntervals(intervals) == result
