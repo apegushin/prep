@@ -1,21 +1,28 @@
-from src.two_pointer import TwoPointerLeetCode
+import src.two_pointer as tplc
+import pytest
 
-class TestTwoPointerLeetCode:
-    def setup_method(self, method):
-        print(f'setting up test for {method}')
-        self.tplc = TwoPointerLeetCode()
+@pytest.mark.parametrize('nums, combs',
+                        [([-1, 0, 1, 2, -1, -4], [[-1, -1, 2], [-1, 0, 1]]),
+                         ([0, 0, 0], [[0, 0, 0]]),
+                         ([-2, 0, 0, 2], [[-2, 0, 2]]),
+                        ])
+def test_threeSum(nums, combs):
+    assert tplc.threeSum(nums) == combs
 
-    def test_threeSum(self):
-        assert self.tplc.threeSum([-1, 0, 1, 2, -1, -4]) == [[-1, -1, 2], [-1, 0, 1]]
-        assert self.tplc.threeSum([0, 0, 0]) == [[0, 0, 0]]
-        assert self.tplc.threeSum([-2, 0, 0, 2]) == [[-2, 0, 2]]
+@pytest.mark.parametrize('nums, target, res',
+                        [([-1, 2, 1, -4], 1, 2),
+                         ([0, 0, 0], 1, 0),
+                         ([-2, 0, 0, 2], 2, 2),
+                         ([2, 5, 6, 7], 16, 15),
+                        ])
+def test_threeSumClosest(nums, target, res):
+    assert tplc.threeSumClosest(nums, target) == res
 
-    def test_threeSumClosest(self):
-        assert self.tplc.threeSumClosest([-1, 2, 1, -4], 1) == 2
-        assert self.tplc.threeSumClosest([0, 0, 0], 1) == 0
-        assert self.tplc.threeSumClosest([-2, 0, 0, 2], 2) == 2
-        assert self.tplc.threeSumClosest([2, 5, 6, 7], 16) == 15
-
-    def test_longestMountain(self):
-        assert self.tplc.longestMountain([2,1,4,7,3,2,5]) == 5
-        assert self.tplc.longestMountain([2,2,2]) == 0
+@pytest.mark.parametrize('nums, res',
+                        [([2,1,4,7,3,2,5], 5),
+                         ([2,2,2], 0),
+                         ([0], 0),
+                         ([2, 3], 0)
+                        ])
+def test_longestMountain(nums, res):
+    assert tplc.longestMountain(nums) == res

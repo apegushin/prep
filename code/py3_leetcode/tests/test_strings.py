@@ -1,21 +1,22 @@
-from src.strings import StringLeetCode
+import src.strings as slc
+import pytest
 
-class TestStringLeetcode:
+@pytest.mark.parametrize('s, l',
+                        [('abcabcbb', 3),
+                         ('bbbbb', 1),
+                         ('pwwkew', 3),
+                         ('', 0),
+                        ])
+def test_lengthOfLongestSubstring(s, l):
+    assert slc.lengthOfLongestSubstring(s) == l
 
-    def setup_method(self, method):
-        print(f'setting up test for {method}')
-        self.slp = StringLeetCode()
-
-    def teardown_method(self, method):
-        print(f'tearing down after test for {method}')
-
-    def test_lengthOfLongestSubstring(self):
-        assert self.slp.lengthOfLongestSubstring('abcabcbb') == 3
-        assert self.slp.lengthOfLongestSubstring('bbbbb') == 1
-        assert self.slp.lengthOfLongestSubstring('pwwkew') == 3
-        assert self.slp.lengthOfLongestSubstring('') == 0
-
-    def test_longestPalindrome(self):
-        assert self.slp.longestPalindrome('babad') == 'bab' or self.slp.longestPalindrome('babad') == 'aba'
-        assert self.slp.longestPalindrome('cbbd') == 'bb'
-        assert self.slp.longestPalindrome('a') == 'a'
+@pytest.mark.parametrize('s, pals',
+                        [('babad', ['bab', 'aba']),
+                         ('cbbd', ['bb']),
+                         ('a', ['a']),
+                        ])
+def test_longestPalindrome(s, pals):
+    if len(pals) == 1:
+        assert slc.longestPalindrome(s) == pals[0]
+    else:
+        assert slc.longestPalindrome(s) in pals
