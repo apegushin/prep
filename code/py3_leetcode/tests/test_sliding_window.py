@@ -1,9 +1,9 @@
-from src.sliding_window import SlidingWindowLeetCode
+import src.sliding_window as swlc
+import pytest
 
-class TestSlidingWindowLeetCode:
-    def setup_method(self, method):
-        self.swlc = SlidingWindowLeetCode()
-
-    def test_mergeNegSortedList(self):
-        assert self.swlc.minSubArrayLen(11, [1,2,3,4,5]) == 3
-        assert self.swlc.minSubArrayLen(7, [2,3,1,2,4,3]) == 2
+@pytest.mark.parametrize('target, nums, min_sz',
+                        [(11, [1,2,3,4,5], 3),
+                         (7, [2,3,1,2,4,3], 2),
+                        ])
+def test_mergeNegSortedList(target, nums, min_sz):
+    assert swlc.minSubArrayLen(target, nums) == min_sz
