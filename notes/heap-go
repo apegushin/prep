@@ -1,1 +1,0 @@
-Heap in Go is implemented as an adapter. Make sure to figure out which API to call - heap or underlying container for Init and len and such.
