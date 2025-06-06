@@ -1,5 +1,5 @@
-import pytest
 import src.graph as glc
+import pytest
 
 @pytest.mark.parametrize('numCourses, prereqs, decision',
                         [(2, [[1,0]], True),

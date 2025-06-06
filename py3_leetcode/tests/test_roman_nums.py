@@ -1,5 +1,5 @@
-import pytest
 import src.roman_nums as rnlc
+import pytest
 
 @pytest.mark.parametrize('integer, roman',
                         [(1, 'I'),

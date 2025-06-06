@@ -1,5 +1,5 @@
-import pytest
 import src.bitwise as blc
+import pytest
 
 @pytest.mark.parametrize('divident, divisor, result',
                         [(10, 3, 3),

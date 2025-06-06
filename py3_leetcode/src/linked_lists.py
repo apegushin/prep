@@ -1,5 +1,4 @@
-from typing import Optional
-from typing import List
+from typing import Optional, List, Any
 import heapq
 
 class ListNode:
@@ -8,7 +7,7 @@ class ListNode:
         self.next = next
 
 
-def printLinkedList(l: Optional[ListNode], label: str = None):
+def printLinkedList(l: Optional[ListNode], label: str = ''):
     node = l
     print(f'{label}: ' if label is not None else '', end='')
     print('head -> ', end='')
@@ -85,7 +84,7 @@ def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
     return rev
 
 def reverseNnodes(head: Optional[ListNode], num: int) -> Optional[ListNode]:
-    if num < 2: return head
+    if head == None or num < 2: return head
 
     last = head
     rev = None
@@ -123,7 +122,7 @@ def mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     class ComparableListNode:
         def __init__(self, l: ListNode):
             self.l = l
-        def __lt__(self, o: ListNode):
+        def __lt__(self, o: Any):
             return self.l.val < o.l.val
 
     heads = []
@@ -141,8 +140,8 @@ def mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
             head = min_head.l
             curr = head
         else:
-            curr.next = min_head.l
-            curr = curr.next
+            curr.next = min_head.l # type: ignore
+            curr = curr.next # type: ignore
         curr.next = None
 
     return head

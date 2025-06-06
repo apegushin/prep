@@ -7,15 +7,15 @@ def letterCombinations(digits: str) -> list[str]:
     if len(digits) == 0:
         return res
     dig2let = {'1': (),
-                '2': ('a', 'b', 'c'),
-                '3': ('d', 'e', 'f'),
-                '4': ('g', 'h', 'i'),
-                '5': ('j', 'k', 'l'),
-                '6': ('m', 'n', 'o'),
-                '7': ('p', 'q', 'r', 's'),
-                '8': ('t', 'u', 'v'),
-                '9': ('w', 'x', 'y', 'z'),
-                '0': (' ')}
+               '2': ('a', 'b', 'c'),
+               '3': ('d', 'e', 'f'),
+               '4': ('g', 'h', 'i'),
+               '5': ('j', 'k', 'l'),
+               '6': ('m', 'n', 'o'),
+               '7': ('p', 'q', 'r', 's'),
+               '8': ('t', 'u', 'v'),
+               '9': ('w', 'x', 'y', 'z'),
+               '0': (' ')}
 
     if len(digits) == 1:
         return list(dig2let[digits[0]])
@@ -127,3 +127,23 @@ def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
 
     findComb([], 0)
     return res
+
+def wordBreak(s: str, wordDict: List[str]) -> bool:
+    """ leetcode #139 """
+
+    if len(s) == 0: return False
+
+    wordSet = set(wordDict)
+    words = []
+    def breakWords(s: str) -> bool:
+        if s == '':
+            return True
+        for i in range(1, len(s) + 1):
+            if s[0:i] in wordSet:
+                words.append(s[0:i])
+                if breakWords(s[i:]):
+                    return True
+                words.pop()
+        return False
+
+    return breakWords(s)
