@@ -68,3 +68,21 @@ def wordBreak(s: str, wordDict: List[str]) -> bool:
                     flags[i + len(w)] = True
 
     return flags[len(s)]
+
+def jumpGameII(nums: List[int]) -> int:
+    """ leetcode #45 """
+
+    n = len(nums)
+    min_jumps = [0] * n
+
+    for i in range(n - 2, -1, -1):
+        cur_min = n + 1
+        for j in range(1, nums[i] + 1):
+            if i + j < n:
+                cur_min = min(cur_min, 1 + min_jumps[i + j])
+        min_jumps[i] = int(cur_min)
+    return min_jumps[0]
+
+
+
+

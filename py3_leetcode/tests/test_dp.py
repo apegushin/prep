@@ -34,3 +34,12 @@ def test_rob(nums, result):
                         ])
 def test_wordBreak(s, wordDict, result):
     assert dplc.wordBreak(s, wordDict) == result
+
+@pytest.mark.parametrize('nums, result',
+                        [([2,3,1,1,4], 2),
+                         ([2,3,0,1,4], 2),
+                         ([1,1,1,1], 3)
+                        ])
+def test_jumpGameII(nums, result):
+    assert dplc.jumpGameII(nums) == result
+
