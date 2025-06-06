@@ -65,3 +65,16 @@ def mergeIntervals(intervals: List[List[int]]) -> List[List[int]]:
             i += 1
 
     return intervals
+
+def hIndex(citations: List[int]) -> int:
+    """ leetcode #274 """
+
+    cur_h, max_h = 0, 0
+    n = len(citations)
+    if n == 0: return max_h
+
+    citations.sort()
+    for i in range(n - 1, -1, -1):
+        cur_h = min(n - i, citations[i])
+        max_h = max(max_h, cur_h)
+    return max_h

@@ -30,3 +30,13 @@ def test_mergeTwoSortedListsInPlace(nums1, m, nums2, n, expectedNums1):
                         ])
 def test_mergeIntervals(intervals, result):
     assert slc.mergeIntervals(intervals) == result
+
+@pytest.mark.parametrize('citations, h',
+                        [([3,0,6,1,5], 3),
+                         ([1,3,1], 1),
+                         ([100], 1),
+                         ([100,100], 2),
+                         ([0], 0),
+                        ])
+def test_hIndex(citations, h):
+    assert slc.hIndex(citations) == h
