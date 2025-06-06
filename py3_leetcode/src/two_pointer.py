@@ -11,7 +11,7 @@ def threeSum(nums: list[int]) -> list[list[int]]:
 
     i = 0
     for i in range(len(nums) - 2):
-        if i > 0 and nums[i] == nums[i - 1]:
+        if i > 0 and nums[i] == nums[i-1]:
             continue
 
         l = i + 1
@@ -24,7 +24,7 @@ def threeSum(nums: list[int]) -> list[list[int]]:
             else:
                 res.append([nums[i], nums[l], nums[r]])
                 l += 1
-                while l < r and nums[l] == nums[l - 1]:
+                while l < r and nums[l] == nums[l-1]:
                     l += 1
     return res
 
@@ -36,7 +36,7 @@ def threeSumClosest(nums: list[int], target: int) -> int:
     closest_sum = math.inf
     res = []
     for i in range(len(nums) - 2):
-        if i > 0 and nums[i] == nums[i - 1]:
+        if i > 0 and nums[i] == nums[i-1]:
             continue
 
         l = i + 1
@@ -47,12 +47,12 @@ def threeSumClosest(nums: list[int], target: int) -> int:
                 closest_sum = curr_sum
 
             if curr_sum == target:
-                return closest_sum
+                return int(closest_sum)
             elif curr_sum < target:
                 l += 1
             else:
                 r -= 1
-    return closest_sum
+    return int(closest_sum)
 
 def longestMountain_fromPeak(arr: List[int]) -> int:
     """ leetcode #845 """
@@ -63,11 +63,11 @@ def longestMountain_fromPeak(arr: List[int]) -> int:
     while i < n:
         ls, rs = 0, 0
         li, ri = i - 1, i + 1
-        while li >= 0 and arr[li] < arr[li + 1]:
+        while li >= 0 and arr[li] < arr[li+1]:
             ls += 1
             li -= 1
 
-        while ri <= n and arr[ri] < arr[ri - 1]:
+        while ri <= n and arr[ri] < arr[ri-1]:
             rs += 1
             ri += 1
 
@@ -87,12 +87,12 @@ def longestMountain(arr: List[int]) -> int:
     slopeLen, maxM = 0, 0
 
     for i in range(1, n):
-        slopeLen = slopeLen + 1 if arr[i] > arr[i - 1] else 0
+        slopeLen = slopeLen + 1 if arr[i] > arr[i-1] else 0
         leftSlope[i] = slopeLen
 
     slopeLen = 0
     for j in range(n - 2, 0, -1):
-        slopeLen = slopeLen + 1 if arr[j] > arr[j + 1] else 0
+        slopeLen = slopeLen + 1 if arr[j] > arr[j+1] else 0
         rightSlope[j] = slopeLen
 
     print(arr, leftSlope, rightSlope)

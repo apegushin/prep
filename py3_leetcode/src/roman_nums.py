@@ -2,14 +2,17 @@ def intToRoman(num: int) -> str:
     """ leetcode #12 """
 
     def first_digit(num: int, dec_place: int = 1000) -> tuple[int, int]:
+        res = (0, 0)
         if num == 0:
-            return (0, 0)
+            return res
         while dec_place >= 1:
             digit = num // dec_place
             if digit > 0:
-                return (digit, dec_place)
+                res = (digit, dec_place)
+                break
             else:
                 dec_place //= 10
+        return res
 
     digit, dec_place = first_digit(num)
     dec2rom = {True: {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'},
@@ -33,7 +36,7 @@ def romanToInt(s: str) -> int:
     sn = {'IV': 4, 'IX': 9, 'XL': 40, 'XC': 90, 'CD': 400, 'CM': 900}
     n = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     while i < len(s):
-        if i + 1 < len(s) and s[i: i + 2] in sn.keys():
+        if i + 1 < len(s) and s[i: i+2] in sn.keys():
             res += sn[s[i:i+2]]
             i += 2
         else:

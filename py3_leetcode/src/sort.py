@@ -11,7 +11,7 @@ def mergeNegSortedList(nums: List[int]) -> List[int]:
             break
 
     res = []
-    l, r = i, i + 1
+    l, r = i, i + 1 # type: ignore
     print(f'l = {l}, r = {r}')
     while len(res) != len(nums):
         if l < 0:
@@ -58,8 +58,8 @@ def mergeIntervals(intervals: List[List[int]]) -> List[List[int]]:
 
     i = 0
     while i < len(intervals) - 1:
-        if intersect(intervals[i], intervals[i + 1]):
-            mergeInto1st(intervals[i], intervals[i + 1])
+        if intersect(intervals[i], intervals[i+1]):
+            mergeInto1st(intervals[i], intervals[i+1])
             intervals.pop(i + 1)
         else:
             i += 1

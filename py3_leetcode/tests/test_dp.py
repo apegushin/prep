@@ -38,8 +38,14 @@ def test_wordBreak(s, wordDict, result):
 @pytest.mark.parametrize('nums, result',
                         [([2,3,1,1,4], 2),
                          ([2,3,0,1,4], 2),
-                         ([1,1,1,1], 3)
+                         ([1,1,1,1], 3),
                         ])
 def test_jumpGameII(nums, result):
     assert dplc.jumpGameII(nums) == result
 
+@pytest.mark.parametrize('obstacleGrid, num_ways',
+                        [([[0,0,0],[0,1,0],[0,0,0]], 2),
+                         ([[0,1],[0,0]], 1),
+                        ])
+def test_uniquePathsWithObstacles(obstacleGrid, num_ways):
+    assert dplc.uniquePathsWithObstacles(obstacleGrid) == num_ways

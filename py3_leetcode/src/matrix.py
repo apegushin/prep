@@ -77,19 +77,19 @@ def numIslands(grid: list[list[str]]) -> int:
         while queue:
             ci, cj = queue.popleft()
             print(f'ci = {ci}, cj = {cj}')
-            if ci > 0 and grid[ci - 1][cj] == '1':
-                grid[ci - 1][cj] = '0'
+            if ci > 0 and grid[ci-1][cj] == '1':
+                grid[ci-1][cj] = '0'
                 queue.append((ci - 1,cj))
-            if ci < n - 1 and grid[ci + 1][cj] == '1':
-                grid[ci + 1][cj] = '0'
+            if ci < n - 1 and grid[ci+1][cj] == '1':
+                grid[ci+1][cj] = '0'
                 queue.append((ci + 1, cj))
-            if cj > 0 and grid[ci][cj - 1] == '1':
-                grid[ci][cj - 1] = '0'
+            if cj > 0 and grid[ci][cj-1] == '1':
+                grid[ci][cj-1] = '0'
                 queue.append((ci, cj - 1))
-            if cj < m - 1 and grid[ci][cj + 1] == '1':
-                grid[ci][cj + 1] = '0'
+            if cj < m - 1 and grid[ci][cj+1] == '1':
+                grid[ci][cj+1] = '0'
                 queue.append((ci, cj + 1))
-            grid[ci][cj] = 0
+            grid[ci][cj] = '0'
 
     count = 0
     for i in range(n):
