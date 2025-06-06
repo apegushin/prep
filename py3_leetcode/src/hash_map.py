@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import List
 
 def wordPattern(pattern: str, s: str) -> bool:
     """ leetcode #290 """
@@ -30,3 +31,20 @@ def findTheDifference(s: str, t: str) -> str:
             res = k
             break
     return res
+
+def longestConsecutive(nums: List[int]) -> int:
+    """ leetcode #128 """
+
+    if len(nums) < 2: return len(nums)
+    numsSet = set(nums)
+    maxL = 1
+
+    for num in numsSet:
+        if num - 1 not in numsSet:
+            i = 1
+            while True:
+                if num + i not in numsSet:
+                    break
+                i += 1
+            maxL = max(maxL, i)
+    return maxL
