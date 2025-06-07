@@ -195,9 +195,9 @@ def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
         while fast is not None and fast.next is not None:
             fast = fast.next.next
             temp = slow
-            slow = slow.next
+            slow = slow.next # type: ignore
 
-        temp.next = None
+        temp.next = None # type: ignore
         left = mergeSortLinkedList(head)
         right = mergeSortLinkedList(slow)
 
