@@ -147,6 +147,8 @@ def mergeKLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     return head
 
 def swapPairs(head: Optional[ListNode]) -> Optional[ListNode]:
+    """ leetcode #24 """
+
     if head is None or head.next is None: return head
 
     dummy = ListNode(0, head)
@@ -163,3 +165,42 @@ def swapPairs(head: Optional[ListNode]) -> Optional[ListNode]:
         cur2 = post.next if post is not None else None
 
     return dummy.next
+
+def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
+    """ leetcode #148 """
+
+    def mergeTwoSortedLists(h1: Optional[ListNode], h2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0, None)
+        cur = dummy
+        while h1 is not None and h2 is not None:
+            if h1.val < h2.val:
+                cur.next = h1
+                h1 = h1.next
+            else:
+                cur.next = h2
+                h2 = h2.next
+            cur = cur.next
+
+        if h1 is not None:
+            cur.next = h1
+        elif h2 is not None:
+            cur.next = h2
+
+        return dummy.next
+
+    def mergeSortLinkedList(head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None: return head
+
+        fast, slow, temp = head, head, head
+        while fast is not None and fast.next is not None:
+            fast = fast.next.next
+            temp = slow
+            slow = slow.next
+
+        temp.next = None
+        left = mergeSortLinkedList(head)
+        right = mergeSortLinkedList(slow)
+
+        return mergeTwoSortedLists(left, right)
+
+    return mergeSortLinkedList(head)
