@@ -1,4 +1,5 @@
 from typing import List
+import time
 
 def letterCombinations(digits: str) -> list[str]:
     """ leecode #17 """
@@ -147,3 +148,70 @@ def wordBreak(s: str, wordDict: List[str]) -> bool:
         return False
 
     return breakWords(s)
+
+def restoreIpAddresses_naive(s: str) -> List[str]:
+    """ leetcode #93 """
+
+    res = []
+    if len(s) < 4 or len(s) > 12:
+        return res
+
+    accum = []
+    def is_valid_ip() -> bool:
+        for ip_num in ''.join(accum).split('.'):
+            if (len(ip_num) == 0
+                or (ip_num[0] == '0' and len(ip_num) > 1)
+                or (int(ip_num) > 255)):
+                return False
+        return True
+
+    def buildIpAddr(pos: int, dots_left: int):
+        if dots_left == 0 and pos == len(s) and is_valid_ip():
+            res.append(''.join(accum))
+            return
+
+        if dots_left > 0 and len(accum) > 0 and accum[-1] != '.':
+            accum.append('.')
+            buildIpAddr(pos, dots_left - 1)
+            accum.pop()
+
+        if pos < len(s):
+            accum.append(s[pos])
+            buildIpAddr(pos + 1, dots_left)
+            accum.pop()
+
+    buildIpAddr(0, 3)
+    return res
+
+def restoreIpAddresses(s: str) -> List[str]:
+    """ leetcode #93 """
+
+    res = []
+    if len(s) < 4 or len(s) > 12:
+        return res
+
+    def is_valid_ipaddr_num(num_str: str) -> bool:
+        return not (len(num_str) == 0 or len(num_str) > 3
+            or (num_str[0] == '0' and len(num_str) > 1)
+            or (int(num_str) > 255))
+
+    def buildIpAddr(accum: str, s: str, dots_left: int):
+        if len(s) == 0 and dots_left == -1:
+            res.append(accum)
+            return
+        if dots_left == -1:
+            return
+
+        i = 1
+        while i <= len(s):
+            num_str = s[:i]
+            if is_valid_ipaddr_num(num_str):
+                if dots_left > 0:
+                    buildIpAddr(accum + num_str + '.', s[i:], dots_left - 1)
+                else:
+                    buildIpAddr(accum + num_str, s[i:], -1)
+            i += 1
+
+    buildIpAddr('', s, 3)
+    return res
+
