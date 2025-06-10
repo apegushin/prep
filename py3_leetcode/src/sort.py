@@ -1,4 +1,5 @@
 from typing import List
+import heapq
 
 def mergeNegSortedList(nums: List[int]) -> List[int]:
     if len(nums) == 0:
@@ -12,7 +13,6 @@ def mergeNegSortedList(nums: List[int]) -> List[int]:
 
     res = []
     l, r = i, i + 1 # type: ignore
-    print(f'l = {l}, r = {r}')
     while len(res) != len(nums):
         if l < 0:
             res.append(nums[r])
@@ -28,6 +28,90 @@ def mergeNegSortedList(nums: List[int]) -> List[int]:
             r += 1
 
     return res
+
+def binarySearch(nums: List[int], num: int) -> int:
+    res = -1
+    if len(nums) == 0: return res
+
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        m = (r + l) // 2
+        if nums[m] == num:
+            res = m
+            break
+        elif nums[m] > num:
+            r = m - 1
+        else:
+            l = m + 1
+
+    return res
+
+def heapSort(nums: List[int]):
+    if len(nums) < 2: return
+
+    heapq.heapify(nums)
+    nums_sorted = []
+    while(nums):
+        nums_sorted.append(heapq.heappop(nums))
+    nums[:] = nums_sorted
+
+def heapSortNoStorage(nums: List[int]):
+    if len(nums) < 2: return
+
+    def min_heapify_subtree(nums: List[int], i: int, n: int):
+        l = 2*i + 1
+        r = 2*i + 2
+        largest = i
+
+        if l < n and nums[l] > nums[largest]:
+            largest = l
+
+        if r < n and nums[r] > nums[largest]:
+            largest = r
+
+        if largest != i:
+            nums[largest], nums[i] = nums[i], nums[largest]
+            min_heapify_subtree(nums, largest, n)
+
+    for i in range(len(nums) // 2, -1, -1):
+        min_heapify_subtree(nums, i, len(nums))
+
+    for i in range(len(nums) - 1, 0, -1):
+        nums[0], nums[i] = nums[i], nums[0]
+        min_heapify_subtree(nums, 0, i)
+
+def mergeSort(nums: List[int]):
+    if len(nums) < 2: return
+
+    def split_merge(nums: List[int]) -> List[int]:
+        if len(nums) < 2:
+            return nums[:]
+
+        si = len(nums) // 2
+        l = split_merge(nums[:si])
+        r = split_merge(nums[si:])
+
+        k = 0
+        while l and r:
+            if l[0] < r[0]:
+                nums[k] = l[0]
+                k += 1
+                l.pop(0)
+            else:
+                nums[k] = r[0]
+                k += 1
+                r.pop(0)
+        if l:
+            for i in range(len(l)):
+                nums[k] = l[i]
+                k += 1
+        elif r:
+            for i in range(len(r)):
+                nums[k] = r[i]
+                k += 1
+        return nums
+
+    nums[:] = split_merge(nums)
 
 def mergeTwoSortedListsInPlace(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     """ leetcode #88 """

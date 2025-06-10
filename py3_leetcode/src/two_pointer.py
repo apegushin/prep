@@ -102,3 +102,44 @@ def longestMountain(arr: List[int]) -> int:
             maxM = max(maxM, 1 + leftSlope[k] + rightSlope[k])
 
     return maxM
+
+def reverseSortedList(nums: List[int]) -> None:
+    """ not a leetcode problem, but part of several """
+    """ return None since reverse happens in-place """
+    if len(nums) < 2:
+        return
+
+    l, r = 0, len(nums) - 1
+    while l < r:
+        nums[l], nums[r] = nums[r], nums[l]
+        l += 1
+        r -= 1
+
+def nextPermutation(nums: List[int]) -> None:
+    """ leetcode #31 """
+
+    if len(nums) < 2: return
+
+    r = len(nums) - 1
+    while r > 0 and nums[r] <= nums[r - 1]:
+        r -= 1
+
+    if r == 0:
+        l, r = 0, len(nums) - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
+        return
+
+    sw = r - 1
+    r = len(nums) - 1
+    while r > sw and nums[r] <= nums[sw]:
+        r -= 1
+
+    nums[sw], nums[r] = nums[r], nums[sw]
+    l, r = sw + 1, len(nums) - 1
+    while l < r:
+        nums[l], nums[r] = nums[r], nums[l]
+        l += 1
+        r -= 1
