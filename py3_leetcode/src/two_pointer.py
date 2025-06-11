@@ -95,8 +95,6 @@ def longestMountain(arr: List[int]) -> int:
         slopeLen = slopeLen + 1 if arr[j] > arr[j+1] else 0
         rightSlope[j] = slopeLen
 
-    print(arr, leftSlope, rightSlope)
-
     for k in range(n):
         if leftSlope[k] > 0 and rightSlope[k] > 0:
             maxM = max(maxM, 1 + leftSlope[k] + rightSlope[k])

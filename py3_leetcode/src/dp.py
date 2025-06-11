@@ -52,7 +52,6 @@ def rob(nums: List[int]) -> int:
     partials = [nums[0], nums[1], nums[0] + nums[2]]
     for i in range(3, n):
         partials.append(nums[i] + (max(partials[i-2], partials[i-3])))
-        print(partials)
     return max(partials[n-1], partials[n-2])
 
 def wordBreak(s: str, wordDict: List[str]) -> bool:

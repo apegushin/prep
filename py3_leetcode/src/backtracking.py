@@ -215,3 +215,28 @@ def restoreIpAddresses(s: str) -> List[str]:
     buildIpAddr('', s, 3)
     return res
 
+def permuteUnique(nums: List[int]) -> List[List[int]]:
+    """ leetcode #47 """
+
+    res = []
+    if len(nums) == 0:
+        return res
+
+    def buildPermutations(accum: List[int], taken_idx: set[int]):
+        if len(accum) == len(nums):
+            res.append(accum[:])
+            return
+
+        used_vals = set()
+        for i in range(0, len(nums)):
+            if i not in taken_idx and nums[i] not in used_vals:
+                used_vals.add(nums[i])
+                taken_idx.add(i)
+                accum.append(nums[i])
+                buildPermutations(accum, taken_idx)
+                accum.pop()
+                taken_idx.remove(i)
+
+    buildPermutations([], set())
+    return res
+

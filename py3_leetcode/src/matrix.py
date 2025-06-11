@@ -8,9 +8,7 @@ def spiralOrder(matrix: list[list[int]]) -> list[int]:
     res = []
     while t <= b and l <= r:
         i, j = t, l
-        print(f't = {t}, b = {b}, l = {l}, r = {r}, i = {i}, j = {j}')
         while j <= r:
-            print(f'going right adding {matrix[i][j]}, i = {i}, j = {j}')
             res.append(matrix[i][j])
             j += 1
         t += 1
@@ -18,7 +16,6 @@ def spiralOrder(matrix: list[list[int]]) -> list[int]:
         i += 1
         if i > b: break
         while i <= b:
-            print(f'going down adding {matrix[i][j]}, i = {i}, j = {j}')
             res.append(matrix[i][j])
             i += 1
         r -= 1
@@ -26,7 +23,6 @@ def spiralOrder(matrix: list[list[int]]) -> list[int]:
         j -= 1
         if j < l: break
         while j >= l:
-            print(f'going left adding {matrix[i][j]}, i = {i}, j = {j}')
             res.append(matrix[i][j])
             j -= 1
         b -= 1
@@ -34,7 +30,6 @@ def spiralOrder(matrix: list[list[int]]) -> list[int]:
         i -= 1
         if i < t: break
         while i >= t:
-            print(f'going up adding {matrix[i][j]}, i = {i}, j = {j}')
             res.append(matrix[i][j])
             i -= 1
         l += 1
@@ -69,14 +64,12 @@ def numIslands(grid: list[list[str]]) -> int:
 
     n = len(grid)
     m = len(grid[0])
-    print(f'n = {n}, m = {m}')
 
     def destroyIsland(i: int, j: int):
         queue = deque([(i, j)])
 
         while queue:
             ci, cj = queue.popleft()
-            print(f'ci = {ci}, cj = {cj}')
             if ci > 0 and grid[ci-1][cj] == '1':
                 grid[ci-1][cj] = '0'
                 queue.append((ci - 1,cj))
