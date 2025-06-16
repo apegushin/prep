@@ -24,3 +24,24 @@ def test_findTheDifference(s, t, result):
                         ])
 def test_longestConsecutive(nums, result):
     assert hmlc.longestConsecutive(nums) == result
+
+@pytest.mark.parametrize('numerator, denominator, result',
+                        [(1, 2, '0.5'),
+                         (2, 1, '2'),
+                         (-4, 3, '-1.(3)'),
+                         (-4, -1, '4'),
+                         (5, 200, '0.025'),
+                         (5, 2000, '0.0025'),
+                         (5, 20000, '0.00025'),
+                         (1, 500, '0.002'),
+                         (-1, 500, '-0.002'),
+                         (1, -500, '-0.002'),
+                         (-1, -500, '0.002'),
+                         (200, 5, '40'),
+                         (1, 6, '0.1(6)'),
+                         (-220, 5, '-44'),
+                         (222, -5, '-44.4'),
+                         (4, 333, '0.(012)'),
+                        ])
+def test_fractionToDecimal(numerator, denominator, result):
+    assert hmlc.fractionToDecimal(numerator, denominator) == result
