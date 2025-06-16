@@ -48,3 +48,44 @@ def longestConsecutive(nums: List[int]) -> int:
                 i += 1
             maxL = max(maxL, i)
     return maxL
+
+def fractionToDecimal(numerator: int, denominator: int) -> str:
+    """ leetcode #166 """
+
+    if numerator == 0:
+        return '0'
+
+    res = ['-'] if (numerator < 0) ^ (denominator < 0) else []
+    numerator, denominator = abs(numerator), abs(denominator)
+    res.append(str(numerator // denominator))
+    remainder = numerator % denominator
+    if remainder == 0:
+        return ''.join(res)
+
+    res.append('.')
+    num_hist = {}
+
+    while remainder:
+        if remainder in num_hist:
+            res.insert(num_hist[remainder], '(')
+            res.append(')')
+            break
+        num_hist[remainder] = len(res)
+        remainder *= 10
+        res.append(str(remainder // denominator))
+        remainder %= denominator
+    return ''.join(res)
+
+def findRepeatedDnaSequences(s: str) -> List[str]:
+    """ leetcode #187 """
+
+    res_set, seq_set = set(), set()
+    if len(s) < 11: return list(res_set)
+
+    for i in range(0, len(s) - 9):
+        seq = s[i:i+10]
+        if seq in seq_set:
+            res_set.add(seq)
+        else:
+            seq_set.add(seq)
+    return list(res_set)
