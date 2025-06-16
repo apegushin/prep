@@ -45,3 +45,11 @@ def test_longestConsecutive(nums, result):
                         ])
 def test_fractionToDecimal(numerator, denominator, result):
     assert hmlc.fractionToDecimal(numerator, denominator) == result
+
+@pytest.mark.parametrize('sequence, result',
+                        [('AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT', ['CCCCCAAAAA', 'AAAAACCCCC']),
+                         ('AAAAAAAAAAAAA', ['AAAAAAAAAA']),
+                        ])
+def test_findRepeatedDnaSequences(sequence, result):
+    assert hmlc.findRepeatedDnaSequences(sequence).sort() == result.sort()
+
