@@ -1,6 +1,13 @@
 from collections import deque
+from typing import List, Optional
 
-def spiralOrder(matrix: list[list[int]]) -> list[int]:
+def print_grid(grid):
+    print('\n')
+    for r in grid:
+        print(r)
+    print('\n')
+
+def spiralOrder(matrix: List[List[int]]) -> List[int]:
     """ leetcode #54 """
 
     t, b, l, r = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
@@ -91,3 +98,72 @@ def numIslands(grid: list[list[str]]) -> int:
                 count += 1
                 destroyIsland(i, j)
     return count
+
+def shortestBridge(grid: List[List[int]]) -> int:
+    """ leetcode #934 """
+
+    n = len(grid)
+    def paint_island(i: int, j: int):
+        if i >= 0 and i < n and j >= 0 and j < n and grid[i][j] == 1:
+            grid[i][j] = n + 1
+            paint_island(i - 1, j)
+            paint_island(i + 1, j)
+            paint_island(i, j - 1)
+            paint_island(i, j + 1)
+
+    # find and paint the first island
+    found_island = False
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 1:
+                found_island = True
+                paint_island(i, j)
+                break
+        if found_island:
+            break
+
+    def shortest_bridge(i: int, j: int) -> int:
+        neighbors = deque([(i, j)])
+        undo = []
+        num_steps = 0
+        def check_cell(i: int, j: int) -> bool:
+            reached = False
+            if i >= 0 and i < n and j >= 0 and j < n:
+                if grid[i][j] == 1:
+                    reached = True
+                elif grid[i][j] == 0:
+                    neighbors.append((i, j))
+                    grid[i][j] = n + 2
+                    undo.append((i, j))
+            return reached
+
+        reached = False
+        while neighbors and not reached:
+            num_steps += 1
+            for _ in range(len(neighbors)):
+                ni, nj = neighbors.popleft()
+                if check_cell(ni - 1, nj):
+                    reached = True
+                elif check_cell(ni + 1, nj):
+                    reached = True
+                elif check_cell(ni, nj - 1):
+                    reached = True
+                elif check_cell(ni, nj + 1):
+                    reached = True
+                if reached:
+                    break
+
+        for ui, uj in undo:
+            grid[ui][uj] = 0
+
+        return num_steps - 1 if reached else n
+
+    # walk the first island and find shortest path to second island
+    min_bridge = n
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == n + 1:
+                min_bridge = min(min_bridge, shortest_bridge(i, j))
+
+    return min_bridge
+
