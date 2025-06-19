@@ -92,3 +92,19 @@ def test_sortList(l, sorted):
     h1 = lllc.createFromList(l)
     h2 = lllc.sortList(h1)
     assert lllc.linkedList2List(h2) == sorted
+
+@pytest.mark.parametrize('l, deduped',
+                        [([1,2,3,3,4,4,5], [1,2,5]),
+                         ([], []),
+                         ([1,1], []),
+                         ([1,2], [1,2]),
+                         ([1,2,2], [1]),
+                         ([1,1,2,2], []),
+                         ([0,1,1,2,2], [0]),
+                         ([1,1,2,2,3], [3]),
+                        ])
+def test_deleteDuplicates(l, deduped):
+    h1 = lllc.createFromList(l)
+    h2 = lllc.deleteDuplicates(h1)
+    assert lllc.linkedList2List(h2) == deduped
+
