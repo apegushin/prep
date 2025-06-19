@@ -181,3 +181,24 @@ def hIndex(citations: List[int]) -> int:
             res = i
             break
     return res
+
+def removeSecondDuplicates(nums: List[int]) -> int:
+    """ leetcode #80 """
+
+    n = len(nums)
+    if n < 2: return n
+    slow = 1 if nums[1] == nums[0] else 0
+    fast = slow + 1
+
+    while fast < n:
+        if nums[fast] == nums[slow]:
+            fast += 1
+        else:
+            slow += 1
+            nums[slow] = nums[fast]
+            fast += 1
+            if fast < n and nums[fast] == nums[slow]:
+                slow += 1
+                nums[slow] = nums[fast]
+                fast += 1
+    return slow + 1

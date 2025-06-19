@@ -94,3 +94,20 @@ def test_allSortFunctions(nums, asc_sorted_nums, random_list_20_items):
                         ])
 def test_binarySearch(nums, num, idx):
     assert slc.binarySearch(nums, num) == idx
+
+@pytest.mark.parametrize('nums, res',
+                        [([1,1,1,2,2,3], 5),
+                         ([0,0,1,1,1,1,2,3,3], 7),
+                         ([], 0),
+                         ([0], 1),
+                         ([0,0], 2),
+                         ([0,1], 2),
+                         ([0,0,0,1,1,1], 4),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1], 4),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2], 5),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2], 6),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2], 6),
+                         ([0,1,2,3,4,5,6,7,8], 9),
+                        ])
+def test_removeSecondDuplicates(nums, res):
+    assert slc.removeSecondDuplicates(nums) == res
