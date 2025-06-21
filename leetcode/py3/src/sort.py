@@ -202,3 +202,20 @@ def removeSecondDuplicates(nums: List[int]) -> int:
                 nums[slow] = nums[fast]
                 fast += 1
     return slow + 1
+
+def findMinInRotatedSortedArray(nums: List[int]) -> int:
+    """ leetcode #153 """
+
+    n = len(nums)
+    if n == 1: return nums[0]
+
+    l, r = 0, n - 1
+    while l < r:
+        m = (l + r) // 2
+        if nums[m] > nums[r]:
+            l = m + 1
+        else:
+            r = m
+    return nums[r]
+
+

@@ -22,5 +22,4 @@ def test_cd_dir(curwd, cdto, result):
                         ])
 def test_shortestBridge(board, moves_list):
     res = mcd.shortestPath(board)
-    print(res)
     assert res == moves_list
