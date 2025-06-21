@@ -218,4 +218,28 @@ def findMinInRotatedSortedArray(nums: List[int]) -> int:
             r = m
     return nums[r]
 
+def searchInRotatedSortedArray(nums: List[int], target: int) -> int:
+    """ leetcode #33 """
+
+    n = len(nums)
+    if n == 1: return 0 if nums[0] == target else -1
+
+    l, r = 0, n - 1
+    while l < r:
+        m = (l + r) // 2
+        if nums[m] == target:
+            return m
+        elif nums[m] > target:
+            if nums[m] > nums[r] and target <= nums[r]:
+                l = m + 1
+            else:
+                r = m
+        else:
+            if nums[m] > nums[r] or target <= nums[r]:
+                l = m + 1
+            else:
+                r = m
+
+    return l if nums[l] == target else -1
+
 

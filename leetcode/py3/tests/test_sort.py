@@ -125,3 +125,19 @@ def test_removeSecondDuplicates(nums, res):
                         ])
 def test_findMinInRotatedSortedArray(nums, res):
     assert slc.findMinInRotatedSortedArray(nums) == res
+
+@pytest.mark.parametrize('nums, target, idx',
+                        [([3,4,5,1,2], 1, 3),
+                         ([4,5,6,7,0,1,2], 0, 4),
+                         ([11,13,15,17], 11, 0),
+                         ([4,5,6,7,0,1,2], 3, -1),
+                         ([1], 0, -1),
+                         ([1,2], 1, 0),
+                         ([2,1], 1, 1),
+                         ([1,3], 3, 1),
+                         ([1,2,3], 1, 0),
+                         ([3,1,2], 1, 1),
+                         ([2,3,1], 1, 2),
+                        ])
+def test_searchInRotatedSortedArray(nums, target, idx):
+    assert slc.searchInRotatedSortedArray(nums, target) == idx
