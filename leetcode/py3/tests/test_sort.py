@@ -141,3 +141,11 @@ def test_findMinInRotatedSortedArray(nums, res):
                         ])
 def test_searchInRotatedSortedArray(nums, target, idx):
     assert slc.searchInRotatedSortedArray(nums, target) == idx
+
+@pytest.mark.parametrize('nums, target, idx',
+                        [([1,3,5,6], 5, 2),
+                         ([1,3,5,6], 2, 1),
+                         ([1,3,5,6], 7, 4),
+                        ])
+def test_searchInsert(nums, target, idx):
+    assert slc.searchInsert(nums, target) == idx

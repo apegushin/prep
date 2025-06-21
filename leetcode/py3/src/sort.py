@@ -242,4 +242,24 @@ def searchInRotatedSortedArray(nums: List[int], target: int) -> int:
 
     return l if nums[l] == target else -1
 
+def searchInsert(nums: List[int], target: int) -> int:
+    """ leetcode #35 """
 
+    n = len(nums)
+    if target < nums[0]: return 0
+    if target > nums[-1]: return n
+
+    l, r = 0, n - 1
+    while l < r:
+        m = (l + r) // 2
+        if nums[m] == target:
+            return m
+        elif target > nums[m]:
+            l = m
+        else:
+            r = m
+        if l + 1 == r:
+            if nums[l] == target: return l
+            elif nums[r] == target: return r
+            else: return r
+    return r
