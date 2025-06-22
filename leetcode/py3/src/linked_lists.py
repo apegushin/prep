@@ -204,3 +204,26 @@ def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
         return mergeTwoSortedLists(left, right)
 
     return mergeSortLinkedList(head)
+
+def deleteDuplicates(head: Optional[ListNode]) -> Optional[ListNode]:
+    """ leetcode #82 """
+
+    if not head or not head.next: return head
+
+    dummy = ListNode()
+    cur = dummy
+
+    while head:
+        if head.next and head.val != head.next.val:
+            cur.next = head
+            head = head.next
+            cur = cur.next
+            cur.next = None
+        elif head.next and head.val == head.next.val:
+            val = head.val
+            while head and head.val == val:
+                head = head.next
+        else:
+            cur.next = head
+            head = head.next
+    return dummy.next

@@ -181,3 +181,85 @@ def hIndex(citations: List[int]) -> int:
             res = i
             break
     return res
+
+def removeSecondDuplicates(nums: List[int]) -> int:
+    """ leetcode #80 """
+
+    n = len(nums)
+    if n < 2: return n
+    slow = 1 if nums[1] == nums[0] else 0
+    fast = slow + 1
+
+    while fast < n:
+        if nums[fast] == nums[slow]:
+            fast += 1
+        else:
+            slow += 1
+            nums[slow] = nums[fast]
+            fast += 1
+            if fast < n and nums[fast] == nums[slow]:
+                slow += 1
+                nums[slow] = nums[fast]
+                fast += 1
+    return slow + 1
+
+def findMinInRotatedSortedArray(nums: List[int]) -> int:
+    """ leetcode #153 """
+
+    n = len(nums)
+    if n == 1: return nums[0]
+
+    l, r = 0, n - 1
+    while l < r:
+        m = (l + r) // 2
+        if nums[m] > nums[r]:
+            l = m + 1
+        else:
+            r = m
+    return nums[r]
+
+def searchInRotatedSortedArray(nums: List[int], target: int) -> int:
+    """ leetcode #33 """
+
+    n = len(nums)
+    if n == 1: return 0 if nums[0] == target else -1
+
+    l, r = 0, n - 1
+    while l < r:
+        m = (l + r) // 2
+        if nums[m] == target:
+            return m
+        elif nums[m] > target:
+            if nums[m] > nums[r] and target <= nums[r]:
+                l = m + 1
+            else:
+                r = m
+        else:
+            if nums[m] > nums[r] or target <= nums[r]:
+                l = m + 1
+            else:
+                r = m
+
+    return l if nums[l] == target else -1
+
+def searchInsert(nums: List[int], target: int) -> int:
+    """ leetcode #35 """
+
+    n = len(nums)
+    if target < nums[0]: return 0
+    if target > nums[-1]: return n
+
+    l, r = 0, n - 1
+    while l < r:
+        m = (l + r) // 2
+        if nums[m] == target:
+            return m
+        elif target > nums[m]:
+            l = m
+        else:
+            r = m
+        if l + 1 == r:
+            if nums[l] == target: return l
+            elif nums[r] == target: return r
+            else: return r
+    return r

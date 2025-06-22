@@ -94,3 +94,58 @@ def test_allSortFunctions(nums, asc_sorted_nums, random_list_20_items):
                         ])
 def test_binarySearch(nums, num, idx):
     assert slc.binarySearch(nums, num) == idx
+
+@pytest.mark.parametrize('nums, res',
+                        [([1,1,1,2,2,3], 5),
+                         ([0,0,1,1,1,1,2,3,3], 7),
+                         ([], 0),
+                         ([0], 1),
+                         ([0,0], 2),
+                         ([0,1], 2),
+                         ([0,0,0,1,1,1], 4),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1], 4),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2], 5),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2], 6),
+                         ([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2], 6),
+                         ([0,1,2,3,4,5,6,7,8], 9),
+                        ])
+def test_removeSecondDuplicates(nums, res):
+    assert slc.removeSecondDuplicates(nums) == res
+
+@pytest.mark.parametrize('nums, res',
+                        [([3,4,5,1,2], 1),
+                         ([4,5,6,7,0,1,2], 0),
+                         ([11,13,15,17], 11),
+                         ([1], 1),
+                         ([1,2], 1),
+                         ([2,1], 1),
+                         ([1,2,3], 1),
+                         ([3,1,2], 1),
+                         ([2,3,1], 1),
+                        ])
+def test_findMinInRotatedSortedArray(nums, res):
+    assert slc.findMinInRotatedSortedArray(nums) == res
+
+@pytest.mark.parametrize('nums, target, idx',
+                        [([3,4,5,1,2], 1, 3),
+                         ([4,5,6,7,0,1,2], 0, 4),
+                         ([11,13,15,17], 11, 0),
+                         ([4,5,6,7,0,1,2], 3, -1),
+                         ([1], 0, -1),
+                         ([1,2], 1, 0),
+                         ([2,1], 1, 1),
+                         ([1,3], 3, 1),
+                         ([1,2,3], 1, 0),
+                         ([3,1,2], 1, 1),
+                         ([2,3,1], 1, 2),
+                        ])
+def test_searchInRotatedSortedArray(nums, target, idx):
+    assert slc.searchInRotatedSortedArray(nums, target) == idx
+
+@pytest.mark.parametrize('nums, target, idx',
+                        [([1,3,5,6], 5, 2),
+                         ([1,3,5,6], 2, 1),
+                         ([1,3,5,6], 7, 4),
+                        ])
+def test_searchInsert(nums, target, idx):
+    assert slc.searchInsert(nums, target) == idx
