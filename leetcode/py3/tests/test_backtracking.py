@@ -47,13 +47,13 @@ def test_combination_sum(candidates, target, combinations):
     assert blc.combination_sum(candidates, target).sort() == combinations.sort()
 
 
-@pytest.mark.parametrize('s, wordDict, result',
+@pytest.mark.parametrize("s, word_dict, result",
                          [('leetcode', ['leet', 'code'], True),
                           ('applepenapple', ['apple', 'pen'], True),
                           ('catsandog', ['cats', 'dog', 'sand', 'and', 'cat'], False),
                           ])
-def test_word_break(s, wordDict, result):
-    assert blc.word_break(s, wordDict) == result
+def test_word_break(s, word_dict, result):
+    assert blc.word_break(s, word_dict) == result
 
 
 @pytest.mark.parametrize('s, result',
