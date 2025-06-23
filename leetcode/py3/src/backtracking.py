@@ -1,8 +1,7 @@
 from typing import List
-import time
 
-def letterCombinations(digits: str) -> list[str]:
-    """ leecode #17 """
+def letter_combinations(digits: str) -> list[str]:
+    """ leetcode #17 """
 
     res = []
     if len(digits) == 0:
@@ -21,23 +20,23 @@ def letterCombinations(digits: str) -> list[str]:
     if len(digits) == 1:
         return list(dig2let[digits[0]])
 
-    def addLetter(i, s):
+    def add_letter(i, s):
         if i != len(digits):
             for c in dig2let[digits[i]]:
-                addLetter(i + 1, s + c)
+                add_letter(i + 1, s + c)
         else:
             res.append(s)
             return
 
-    addLetter(0, '')
+    add_letter(0, '')
     return res
 
-def wordExists(board: list[list[str]], word: str) -> bool:
+def word_exists(board: list[list[str]], word: str) -> bool:
     """ leetcode #79 """
 
-    visited = [[False for i in range(len(board[0]))] for j in range(len(board))]
+    visited = [[False for _ in range(len(board[0]))] for _ in range(len(board))]
 
-    def charFound(i, j, n) -> bool:
+    def char_found(i, j, n) -> bool:
         if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) \
             or visited[i][j] or board[i][j] != word[n]:
             return False
@@ -46,16 +45,16 @@ def wordExists(board: list[list[str]], word: str) -> bool:
             return True
         else:
             visited[i][j] = True
-            res = charFound(i + 1, j, n + 1) \
-                or charFound(i - 1, j, n + 1) \
-                or charFound(i, j + 1, n + 1) \
-                or charFound(i, j - 1, n + 1)
+            res = char_found(i + 1, j, n + 1) \
+                or char_found(i - 1, j, n + 1) \
+                or char_found(i, j + 1, n + 1) \
+                or char_found(i, j - 1, n + 1)
             visited[i][j] = False
             return res
 
     for i in range(len(board)):
         for j in range(len(board[i])):
-            if charFound(i, j, 0):
+            if char_found(i, j, 0):
                 return True
 
     return False
@@ -65,57 +64,57 @@ def subsets(nums: List[int]) -> List[List[int]]:
 
     res = []
 
-    def addSubset(cur_s, i):
+    def add_subset(cur_s, i):
         if i == len(nums):
             res.append(cur_s[:])
             return
 
         cur_s.append(nums[i])
-        addSubset(cur_s, i + 1)
+        add_subset(cur_s, i + 1)
         cur_s.pop()
-        addSubset(cur_s, i + 1)
+        add_subset(cur_s, i + 1)
 
-    addSubset([], 0)
+    add_subset([], 0)
     return res
 
 def subsets_generator(nums: List[int]):
     """ leetcode #78 implemented as generator """
 
-    def addSubset(cur_s, i):
+    def add_subset(cur_s, i):
         if i == len(nums):
             yield cur_s[:]
 
         else:
             cur_s.append(nums[i])
-            yield from addSubset(cur_s, i + 1)
+            yield from add_subset(cur_s, i + 1)
             cur_s.pop()
-            yield from addSubset(cur_s, i + 1)
+            yield from add_subset(cur_s, i + 1)
 
-    yield from addSubset([], 0)
+    yield from add_subset([], 0)
 
 def combine(n: int, k: int) -> List[List[int]]:
     """ leetcode #77 """
 
     res = []
 
-    def buildCombination(c, i):
+    def build_combination(c, i):
         if len(c) == k:
             res.append(c[:])
             return
 
         for j in range(i, n + 1):
-            buildCombination(c + [j], j + 1)
+            build_combination(c + [j], j + 1)
 
-    buildCombination([], 1)
+    build_combination([], 1)
     return res
 
-def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+def combination_sum(candidates: List[int], target: int) -> List[List[int]]:
     """ leetcode #39 """
 
     res = []
     candidates.sort()
 
-    def findComb(comb, idx):
+    def find_comb(comb, idx):
         sc = sum(comb)
         if sc == target:
             res.append(comb[:])
@@ -124,32 +123,32 @@ def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
         for i in range(idx, len(candidates)):
             if sc + candidates[i] > target:
                 break
-            findComb(comb + [candidates[i]], i)
+            find_comb(comb + [candidates[i]], i)
 
-    findComb([], 0)
+    find_comb([], 0)
     return res
 
-def wordBreak(s: str, wordDict: List[str]) -> bool:
+def word_break(s: str, word_dict: List[str]) -> bool:
     """ leetcode #139 """
 
     if len(s) == 0: return False
 
-    wordSet = set(wordDict)
+    word_set = set(word_dict)
     words = []
-    def breakWords(s: str) -> bool:
+    def break_words(s: str) -> bool:
         if s == '':
             return True
         for i in range(1, len(s) + 1):
-            if s[0:i] in wordSet:
+            if s[0:i] in word_set:
                 words.append(s[0:i])
-                if breakWords(s[i:]):
+                if break_words(s[i:]):
                     return True
                 words.pop()
         return False
 
-    return breakWords(s)
+    return break_words(s)
 
-def restoreIpAddresses_naive(s: str) -> List[str]:
+def restore_ip_addresses_naive(s: str) -> List[str]:
     """ leetcode #93 """
 
     res = []
@@ -165,25 +164,25 @@ def restoreIpAddresses_naive(s: str) -> List[str]:
                 return False
         return True
 
-    def buildIpAddr(pos: int, dots_left: int):
+    def build_ip_addr(pos: int, dots_left: int):
         if dots_left == 0 and pos == len(s) and is_valid_ip():
             res.append(''.join(accum))
             return
 
         if dots_left > 0 and len(accum) > 0 and accum[-1] != '.':
             accum.append('.')
-            buildIpAddr(pos, dots_left - 1)
+            build_ip_addr(pos, dots_left - 1)
             accum.pop()
 
         if pos < len(s):
             accum.append(s[pos])
-            buildIpAddr(pos + 1, dots_left)
+            build_ip_addr(pos + 1, dots_left)
             accum.pop()
 
-    buildIpAddr(0, 3)
+    build_ip_addr(0, 3)
     return res
 
-def restoreIpAddresses(s: str) -> List[str]:
+def restore_ip_addresses(s: str) -> List[str]:
     """ leetcode #93 """
 
     res = []
@@ -195,7 +194,7 @@ def restoreIpAddresses(s: str) -> List[str]:
             or (num_str[0] == '0' and len(num_str) > 1)
             or (int(num_str) > 255))
 
-    def buildIpAddr(accum: str, s: str, dots_left: int):
+    def build_ip_addr(accum: str, s: str, dots_left: int):
         if len(s) == 0 and dots_left == -1:
             res.append(accum)
             return
@@ -207,22 +206,22 @@ def restoreIpAddresses(s: str) -> List[str]:
             num_str = s[:i]
             if is_valid_ipaddr_num(num_str):
                 if dots_left > 0:
-                    buildIpAddr(accum + num_str + '.', s[i:], dots_left - 1)
+                    build_ip_addr(accum + num_str + '.', s[i:], dots_left - 1)
                 else:
-                    buildIpAddr(accum + num_str, s[i:], -1)
+                    build_ip_addr(accum + num_str, s[i:], -1)
             i += 1
 
-    buildIpAddr('', s, 3)
+    build_ip_addr('', s, 3)
     return res
 
-def permuteUnique(nums: List[int]) -> List[List[int]]:
+def permute_unique(nums: List[int]) -> List[List[int]]:
     """ leetcode #47 """
 
     res = []
     if len(nums) == 0:
         return res
 
-    def buildPermutations(accum: List[int], taken_idx: set[int]):
+    def build_permutations(accum: List[int], taken_idx: set[int]):
         if len(accum) == len(nums):
             res.append(accum[:])
             return
@@ -233,10 +232,10 @@ def permuteUnique(nums: List[int]) -> List[List[int]]:
                 used_vals.add(nums[i])
                 taken_idx.add(i)
                 accum.append(nums[i])
-                buildPermutations(accum, taken_idx)
+                build_permutations(accum, taken_idx)
                 accum.pop()
                 taken_idx.remove(i)
 
-    buildPermutations([], set())
+    build_permutations([], set())
     return res
 
