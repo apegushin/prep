@@ -1,7 +1,7 @@
 from collections import Counter
 from typing import List
 
-def wordPattern(pattern: str, s: str) -> bool:
+def word_pattern(pattern: str, s: str) -> bool:
     """ leetcode #290 """
 
     n = len(pattern)
@@ -20,36 +20,36 @@ def wordPattern(pattern: str, s: str) -> bool:
             return False
     return True
 
-def findTheDifference(s: str, t: str) -> str:
+def find_the_difference(s: str, t: str) -> str:
     """ leetcode #389 """
 
-    sCount, tCount = Counter(s), Counter(t)
+    s_count, t_count = Counter(s), Counter(t)
 
     res = ''
-    for k, v in tCount.items():
-        if k not in sCount.keys() or v > sCount[k]:
+    for k, v in t_count.items():
+        if k not in s_count.keys() or v > s_count[k]:
             res = k
             break
     return res
 
-def longestConsecutive(nums: List[int]) -> int:
+def longest_consecutive(nums: List[int]) -> int:
     """ leetcode #128 """
 
     if len(nums) < 2: return len(nums)
-    numsSet = set(nums)
-    maxL = 1
+    nums_set = set(nums)
+    max_l = 1
 
-    for num in numsSet:
-        if num - 1 not in numsSet:
+    for num in nums_set:
+        if num - 1 not in nums_set:
             i = 1
             while True:
-                if num + i not in numsSet:
+                if num + i not in nums_set:
                     break
                 i += 1
-            maxL = max(maxL, i)
-    return maxL
+            max_l = max(max_l, i)
+    return max_l
 
-def fractionToDecimal(numerator: int, denominator: int) -> str:
+def fraction_to_decimal(numerator: int, denominator: int) -> str:
     """ leetcode #166 """
 
     if numerator == 0:
@@ -76,7 +76,7 @@ def fractionToDecimal(numerator: int, denominator: int) -> str:
         remainder %= denominator
     return ''.join(res)
 
-def findRepeatedDnaSequences(s: str) -> List[str]:
+def find_repeated_dna_sequences(s: str) -> List[str]:
     """ leetcode #187 """
 
     res_set, seq_set = set(), set()

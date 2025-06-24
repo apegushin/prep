@@ -6,24 +6,24 @@ import pytest
                          ('abba', 'dog cat cat fish', False),
                          ('aaaa', 'dog cat cat dog', False),
                         ])
-def test_wordPattern(pattern, words, result):
-    assert hmlc.wordPattern(pattern, words) == result
+def test_word_pattern(pattern, words, result):
+    assert hmlc.word_pattern(pattern, words) == result
 
 @pytest.mark.parametrize('s, t, result',
                         [('abcd', 'abcde', 'e'),
                          ('', 'y', 'y'),
                          ('abababab', 'babababab', 'b'),
                         ])
-def test_findTheDifference(s, t, result):
-    assert hmlc.findTheDifference(s, t) == result
+def test_find_the_difference(s, t, result):
+    assert hmlc.find_the_difference(s, t) == result
 
 @pytest.mark.parametrize('nums, result',
                         [([100,4,200,1,3,2], 4),
                          ([0,3,7,2,5,8,4,6,0,1], 9),
                          ([1,0,1,2], 3),
                         ])
-def test_longestConsecutive(nums, result):
-    assert hmlc.longestConsecutive(nums) == result
+def test_longest_consecutive(nums, result):
+    assert hmlc.longest_consecutive(nums) == result
 
 @pytest.mark.parametrize('numerator, denominator, result',
                         [(1, 2, '0.5'),
@@ -43,13 +43,13 @@ def test_longestConsecutive(nums, result):
                          (222, -5, '-44.4'),
                          (4, 333, '0.(012)'),
                         ])
-def test_fractionToDecimal(numerator, denominator, result):
-    assert hmlc.fractionToDecimal(numerator, denominator) == result
+def test_fraction_to_decimal(numerator, denominator, result):
+    assert hmlc.fraction_to_decimal(numerator, denominator) == result
 
 @pytest.mark.parametrize('sequence, result',
                         [('AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT', ['CCCCCAAAAA', 'AAAAACCCCC']),
                          ('AAAAAAAAAAAAA', ['AAAAAAAAAA']),
                         ])
-def test_findRepeatedDnaSequences(sequence, result):
-    assert hmlc.findRepeatedDnaSequences(sequence).sort() == result.sort()
+def test_find_repeated_dna_sequences(sequence, result):
+    assert hmlc.find_repeated_dna_sequences(sequence).sort() == result.sort()
 
