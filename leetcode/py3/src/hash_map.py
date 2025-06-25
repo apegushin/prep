@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import List
 
 def word_pattern(pattern: str, s: str) -> bool:
@@ -89,3 +89,31 @@ def find_repeated_dna_sequences(s: str) -> List[str]:
         else:
             seq_set.add(seq)
     return list(res_set)
+
+def majority_element(nums: List[int]) -> List[int]:
+    """ leetcode #229 """
+
+    maj = len(nums) // 3
+    res = []
+    counters = defaultdict(int)
+    for n in nums:
+        counters[n] += 1
+        if len(counters) == 3:
+            new_counters = defaultdict(int)
+            for n, c in counters.items():
+                if c > 1:
+                    new_counters[n] = c - 1
+            counters = new_counters
+
+    if len(counters) == 0:
+        return res
+
+    for c in counters.keys():
+        count = 0
+        for n in nums:
+            if c == n:
+                count += 1
+        if count > maj:
+            res.append(c)
+
+    return res
